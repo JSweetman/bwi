@@ -17,21 +17,22 @@ void poseListen(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg)
 	y = (msg -> pose.pose.position.x);
 	x = (msg -> pose.pose.position.y);
 	//geometry_msgs/PoseWithCovarianceStamped Message
-	//ROS_INFO("AMCL POSE(%d,%d)", x,y);
+	ROS_INFO("AMCL POSE(%d,%d)", x,y);
  	
 	if (grayImage.channels() == 1)
 	{
 		
-		y = 240 - y;
+		//y = 240 - y;
 		x = x + 80;
-		y = y + 100;		
-		ROS_INFO("AMCL POSE(%d,%d)", x,y);
+		y = y -200;		
+		//ROS_INFO("AMCL POSE(%d,%d)", x,y);
 
 		for (int i=-1; i <= 1; i++)  
 		{
 			
 			for (int j=-1; j <= 1; j++)
 			{	
+				//grayImage.at<uchar>(3 * x+i,3 * y+j) = 255*(1/(db*3));
 				grayImage.at<uchar>(3 * x+i,3 * y+j) = 0;
 			}
 		}
