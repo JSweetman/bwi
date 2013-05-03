@@ -14,8 +14,11 @@ cv::Mat grayImage;
 
 void poseListen(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg) 
 {
-	y = (msg -> pose.pose.position.x);
-	x = (msg -> pose.pose.position.y);
+	x = (msg -> pose.pose.position.x);
+	y = (msg -> pose.pose.position.y);
+	//x = (x + 13.15)/20;
+	//y = (y + 2.0)/20;
+
 	//geometry_msgs/PoseWithCovarianceStamped Message
 	ROS_INFO("AMCL POSE(%d,%d)", x,y);
  	
@@ -24,13 +27,16 @@ void poseListen(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg)
 		
 		//y = 240 - y;
 		x = x + 80;
-		y = y -200;		
+		y = y + 100;		
 		//ROS_INFO("AMCL POSE(%d,%d)", x,y);
+		//int x2 = x;
+		//int y2 = y;
 
-		for (int i=-1; i <= 1; i++)  
+
+		for (int i=-3; i <= 3; i++)  
 		{
 			
-			for (int j=-1; j <= 1; j++)
+			for (int j=-3; j <= 3; j++)
 			{	
 				//grayImage.at<uchar>(3 * x+i,3 * y+j) = 255*(1/(db*3));
 				grayImage.at<uchar>(3 * x+i,3 * y+j) = 0;

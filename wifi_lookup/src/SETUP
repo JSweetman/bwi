@@ -1,11 +1,11 @@
-THIS IS THE SHIT WE NEED TO RUN.
+Power on the robot and the base. Make sure the robot has a hokuyo laser.
 
-start the laptop then start the base. power on, then green and then yellow to turn on.
-
+Run
 roscore
 
-rosrun hokuyo_node hokuyo_node //Robot
-rosrun wifi_lookup wifi_test //Desktop
+Run Robert's node and our node on the Robot
+rosrun wifi_lookup wifi.py  
+rosrun wifi_lookup wifi_test 
 
 
 rosrun map_server map_server ~/ros/rosbuild_ws/segbot_apps/segbot_navigation/maps/3ne-real.yaml
