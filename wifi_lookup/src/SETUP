@@ -1,0 +1,24 @@
+THIS IS THE SHIT WE NEED TO RUN.
+
+start the laptop then start the base. power on, then green and then yellow to turn on.
+
+roscore
+
+rosrun hokuyo_node hokuyo_node //Robot
+rosrun wifi_lookup wifi_test //Desktop
+
+
+rosrun map_server map_server ~/ros/rosbuild_ws/segbot_apps/segbot_navigation/maps/3ne-real.yaml
+roslaunch segbot_navigation amcl.launch --screen //Desktop
+rostopic echo amcl_pose //Desktop
+
+roslaunch segbot_navigation rviz.launch //Desktop
+
+rosrun wifi_lookup wifi_test //Desktop
+
+roslaunch segbot_bringup segway_base.launch //ROBOTTTT!!!!!
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py // Desktop
+
+rm CMakeCache.txt //Desktop
+rosmake wifi_lookup //Desktop
+rosrun wifi_lookup wifi_test //Desktop

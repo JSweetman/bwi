@@ -10,12 +10,44 @@
 double db = 0;
 uchar x = 0;
 uchar y = 0;
+cv::Mat grayImage;
 
 void poseListen(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg) 
 {
-	x = msg -> pose.pose.position.x;
-	y = msg -> pose.pose.position.y;
+	y = (msg -> pose.pose.position.x);
+	x = (msg -> pose.pose.position.y);
 	//geometry_msgs/PoseWithCovarianceStamped Message
+	//ROS_INFO("AMCL POSE(%d,%d)", x,y);
+ 	
+	if (grayImage.channels() == 1)
+	{
+		
+		y = 240 - y;
+		x = x + 80;
+		y = y + 100;		
+		ROS_INFO("AMCL POSE(%d,%d)", x,y);
+
+		for (int i=-1; i <= 1; i++)  
+		{
+			
+			for (int j=-1; j <= 1; j++)
+			{	
+				grayImage.at<uchar>(3 * x+i,3 * y+j) = 0;
+			}
+		}
+
+
+		ROS_INFO("(%d,%d)", x,y);
+
+		//grayImage.at<uchar>(20,10) = 255; //white
+		//grayImage.at<uchar>(10,11) = 255;
+		//grayImage.at<uchar>(10,12) = 150;
+		//grayImage.at<uchar>(10,13) = 150;
+		//grayImage.at<uchar>(10,14) = 0;
+		//grayImage.at<uchar>(10,15) = 0; //black
+    }
+
+	cv::imshow("Output", grayImage);
 }
 
 void readerCallback(const wifi_lookup::WifiData::ConstPtr& msg) 
@@ -54,16 +86,15 @@ int main(int argc, char **argv)
   	cvStartWindowThread();
 
  	cv::Mat inputImage(cv::imread("maps/3ne-real-new.pgm"));
-	cv::Mat grayImage;
   	cv::cvtColor(inputImage, grayImage, CV_RGB2GRAY);
 
 	// Need AMCL Pose (convert from location to pixel)
-	y = 240 - y;
+	
 
 	//grayImage.at<double>(x,y) = 3*db;
 
 
-    if (grayImage.channels() == 1)
+/*    if (grayImage.channels() == 1)
 	{
 		grayImage.at<uchar>(x,y) = 0;
 		ROS_INFO("(%d,%d)", x,y);
@@ -74,7 +105,7 @@ int main(int argc, char **argv)
 		//grayImage.at<uchar>(10,13) = 150;
 		//grayImage.at<uchar>(10,14) = 0;
 		//grayImage.at<uchar>(10,15) = 0; //black
-    }
+    }*/
 
 	cv::imshow("Output", grayImage);
 

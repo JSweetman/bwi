@@ -2,10 +2,9 @@
 # generated from catkin/cmake/templates/env.sh.in
 
 if [ $# -eq 0 ] ; then
-  /bin/echo "Entering environment at '/nishome/emaras/ros/rosbuild_ws/wifi_localization/wifi_lookup/build/devel', type 'exit' to leave"
-  . "/nishome/emaras/ros/rosbuild_ws/wifi_localization/wifi_lookup/build/devel/setup.sh"
-  "$SHELL" -i
-  /bin/echo "Exiting environment at '/nishome/emaras/ros/rosbuild_ws/wifi_localization/wifi_lookup/build/devel'"
+  /bin/echo "Usage: env.sh COMMANDS"
+  /bin/echo "Calling env.sh without arguments is not supported anymore. Instead spawn a subshell and source a setup file manually."
+  exit 1
 else
   . "/nishome/emaras/ros/rosbuild_ws/wifi_localization/wifi_lookup/build/devel/setup.sh"
   exec "$@"
